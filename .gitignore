@@ -1,0 +1,8 @@
+# ignore items placed into the issues folder
+issues/*
+
+# ignore created .csv files
+*.csv
+
+# ignore jira mapping configurations
+CSV-configuration.txt

@@ -40,9 +40,7 @@ func main() {
 	"+Steps:+\n"+
 	"- run the Axe tools against the page\n"+
 	"- fix any issues reported by axe or denote / justify any issue that is not valid or applicable\n"
-
-	// default array with headers
-	tickets = append(tickets, Ticket{"Summary", "Issue Type", "Epic Link", "Description"})
+	
 	getTextFiles()
 	writeCSV()
 }
@@ -89,9 +87,12 @@ func writeCSV() {
     writer := csv.NewWriter(file)
 	defer writer.Flush()
 
+	err = writer.Write([]string{"Summary", "Issue Type", "Epic Link", "Description"})
+	checkError("Cannot write to file", err)
+
     for _, ticket := range tickets {
 		row := []string{ticket.Summary, ticket.IssueType, ticket.EpicLink, descriptionTemplate + ticket.Description}
-        err := writer.Write(row)
+        err = writer.Write(row)
         checkError("Cannot write to file", err)
     }
 }
